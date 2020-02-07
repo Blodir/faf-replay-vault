@@ -1,0 +1,25 @@
+<ul>
+  <li *ngFor="let filter of filters; let idx = index">
+    {{ filter }}
+    <button mat-button (click)="onRemoveFilter(idx)">remove</button>
+  </li>
+</ul>
+
+<form [formGroup]="filterForm" (ngSubmit)="onAddFilter(filterForm.value)">
+  <mat-form-field>
+    <mat-label></mat-label>
+    <input matInput formControlName="filter-string">
+  </mat-form-field>
+  <button mat-raised-button color="primary" type="submit">Add</button>
+</form>
+
+<input type="text"
+           placeholder="Name"
+           matInput
+           [formControl]="playerAutoControl"
+           [matAutocomplete]="auto">
+<mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+  <mat-option *ngFor="let option of playerAutoOptions$ | async" [value]="option">
+    {{ option && option.attributes ? option.attributes.login : option }}
+  </mat-option>
+</mat-autocomplete>

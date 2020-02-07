@@ -1,0 +1,10 @@
+<faf-game-filters [filters]="getFilters()" (filters)="updateFilters($event)"></faf-game-filters>
+<div *ngFor="let game of games$ | async">
+  <a [href]="game.attributes.replayUrl">{{ game.attributes.name }}</a>
+  <img [src]="(getMapVersion$(game.relationships.mapVersion.data.id) | async).attributes.thumbnailUrlSmall">
+  <ul>
+    <li *ngFor="let stats of game.relationships.playerStats.data">
+      <img [src]="getFactionLogoPath(stats.id) | async"> {{ (getPlayer$(stats.id) | async).attributes.login }} ({{ getRatingChange$(stats.id) | async }})
+    </li>
+  </ul>
+</div>
