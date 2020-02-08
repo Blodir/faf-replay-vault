@@ -96,6 +96,11 @@ export class GamesFacade {
     this.gameService.getGames(query).pipe(tap(console.log)).subscribe(this.resolver.bind(this))
   }
 
+  changePageSize(pageSize) {
+    this.pageSize = pageSize
+    this.loadAll()
+  }
+
   private resetState() {
     this.state = {
       games: [],

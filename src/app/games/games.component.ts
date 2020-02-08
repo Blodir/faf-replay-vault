@@ -67,6 +67,10 @@ export class GamesComponent implements OnInit {
     this.facade.loadAll(this.currentPage)
   }
 
+  changePageSize(pageSize) {
+    this.facade.changePageSize(pageSize)
+  }
+
   getFactionLogoPath(playerStatsId) {
     const base_path = 'assets/images/'
     return this.facade.gamePlayerStats$.pipe(
