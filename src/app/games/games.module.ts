@@ -4,12 +4,14 @@ import { GamesComponent } from './games.component';
 import { GamesFacade } from './games.facade';
 import { GameFiltersComponent } from './game-filters/game-filters.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { MatInputModule, MatButtonModule, MatListModule, MatAutocompleteModule, MatCardModule } from '@angular/material'
+import { MatInputModule, MatButtonModule, MatListModule, MatAutocompleteModule, MatCardModule } from '@angular/material';
+import { PlayersFilterComponent } from './game-filters/players-filter/players-filter.component'
 
 @NgModule({
   declarations: [
     GamesComponent,
-    GameFiltersComponent
+    GameFiltersComponent,
+    PlayersFilterComponent
   ],
   imports: [
     BrowserModule,

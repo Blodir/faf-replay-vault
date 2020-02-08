@@ -1,0 +1,13 @@
+<div>
+  <label for="playerAutocomplete">Player name</label>
+  <input  id="playerAutocomplete"
+          type="text"
+          placeholder="Name"
+          [formControl]="playerAutoControl"
+          [matAutocomplete]="auto">
+  <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+    <mat-option *ngFor="let option of playerAutoOptions$ | async" [value]="option">
+      {{ option && option.attributes ? option.attributes.login : option }}
+    </mat-option>
+  </mat-autocomplete>
+</div>

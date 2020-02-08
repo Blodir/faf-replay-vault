@@ -11,6 +11,8 @@ import { map, switchMap, catchError } from 'rxjs/operators';
 export class GamesComponent implements OnInit {
   games$
 
+  private currentPage = 0
+
   constructor(private facade: GamesFacade) { }
 
   ngOnInit() {
@@ -55,8 +57,14 @@ export class GamesComponent implements OnInit {
   }
 
   updateFilters(filters) {
+    this.currentPage = 0
     this.facade.filters = filters
     this.facade.loadAll()
+  }
+
+  loadMore() {
+    this.currentPage++
+    this.facade.loadAll(this.currentPage)
   }
 
   getFactionLogoPath(playerStatsId) {
@@ -73,10 +81,9 @@ export class GamesComponent implements OnInit {
             return base_path + 'cybran_small.png'
           case 4:
             return base_path + 'seraphim_small.png'
-          default:
-            return base_path + 'uef_small.png'
         }
-      })
+      }),
+      catchError((err) => of('uef_small.png'))
     )
   }
 }

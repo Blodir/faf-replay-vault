@@ -22,6 +22,14 @@ export class GamesFacade {
     mapVersions: []
   })
 
+  private state: State = {
+    games: [],
+    included: [],
+    players: [],
+    gamePlayerStats: [],
+    mapVersions: []
+  }
+
   games$ = this.store$.pipe(
     map(state => state.games),
     distinctUntilChanged()
@@ -48,13 +56,16 @@ export class GamesFacade {
     'playerStats.player.ladder1v1Rating.rating=gt=2000'
   ]
 
+  private pageSize = 5
+
   constructor (private gameService: GameService, private playerService: PlayerService) {}
 
-  private getQuery() {
+  private getQuery(q?) {
     const query = {
-      'page[limit]': 5,
+      'page[limit]': this.pageSize,
       'sort': '-endTime',
       'include': 'playerStats,playerStats.player,mapVersion',
+      ...q
     }
     if (this.filters.length > 0) query['filter'] = this.filters.join(';')
     return query
@@ -68,16 +79,30 @@ export class GamesFacade {
     res.included.filter(i => i.type === "player").forEach(player => players[player.id] = player)
     res.included.filter(i => i.type === "mapVersion").forEach(map => mapVersions[map.id] = map)
 
-    this.store$.next({
-      games: res.data,
-      included: res.included,
-      gamePlayerStats,
-      players,
-      mapVersions
-    })
+    this.state.games = this.state.games.concat(res.data)
+    this.state.included = this.state.included.concat(res.included)
+    this.state.gamePlayerStats = { ...this.state.gamePlayerStats, ...gamePlayerStats}
+    this.state.players = { ...this.state.players, ...players}
+    this.state.mapVersions = { ...this.state.mapVersions, ...mapVersions}
+
+    this.store$.next(this.state)
   }
 
-  loadAll() {
-    this.gameService.getGames(this.getQuery()).pipe(tap(console.log)).subscribe(this.resolver.bind(this))
+  loadAll(page = 0) {
+    if (page === 0) {
+      this.resetState()
+    }
+    const query = this.getQuery({'page[offset]': page * this.pageSize})
+    this.gameService.getGames(query).pipe(tap(console.log)).subscribe(this.resolver.bind(this))
+  }
+
+  private resetState() {
+    this.state = {
+      games: [],
+      included: [],
+      players: [],
+      gamePlayerStats: [],
+      mapVersions: []
+    }
   }
 }

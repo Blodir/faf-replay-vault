@@ -1,25 +1,19 @@
-<ul>
-  <li *ngFor="let filter of filters; let idx = index">
-    {{ filter }}
-    <button mat-button (click)="onRemoveFilter(idx)">remove</button>
-  </li>
-</ul>
+<div class="faf-panel">
+  Filters
+  <ul>
+    <li *ngFor="let filter of filters; let idx = index">
+      {{ filter }}
+      <button (click)="onRemoveFilter(idx)">remove</button>
+    </li>
+  </ul>
+  <form [formGroup]="filterForm" (ngSubmit)="onFormAddFilter(filterForm.value)">
+    <label>Add a raw filter</label>
+    <input type="text" formControlName="filter-string">
+    <button type="submit">Add</button>
+  </form>
+</div>
 
-<form [formGroup]="filterForm" (ngSubmit)="onAddFilter(filterForm.value)">
-  <mat-form-field>
-    <mat-label></mat-label>
-    <input matInput formControlName="filter-string">
-  </mat-form-field>
-  <button mat-raised-button color="primary" type="submit">Add</button>
-</form>
+<div class="faf-panel">
+  <faf-players-filter [filteredPlayerIds]="getFilteredPlayerIds()" (filter)="updateFilter($event, 'playerStats.player.id')"></faf-players-filter>
+</div>
 
-<input type="text"
-           placeholder="Name"
-           matInput
-           [formControl]="playerAutoControl"
-           [matAutocomplete]="auto">
-<mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
-  <mat-option *ngFor="let option of playerAutoOptions$ | async" [value]="option">
-    {{ option && option.attributes ? option.attributes.login : option }}
-  </mat-option>
-</mat-autocomplete>
