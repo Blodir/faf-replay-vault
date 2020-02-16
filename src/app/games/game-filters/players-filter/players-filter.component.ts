@@ -41,6 +41,19 @@ export class PlayersFilterComponent implements OnInit {
 
   private addFilter(playerId: string) {
     this.filteredPlayerIds.push(playerId)
-    this.subject.next('(' + this.filteredPlayerIds.map((id) => 'playerStats.player.id==' + id).join(',') + ')')
+    this.emit(playerId)
+  }
+
+  private emit(playerId) {
+    if (!playerId) {
+      this.subject.next()
+      return
+    }
+    const singleSelection = true
+    if (singleSelection) {
+      this.subject.next('playerStats.player.id==' + playerId)
+    } else {
+      this.subject.next('(' + this.filteredPlayerIds.map((id) => 'playerStats.player.id==' + id).join(',') + ')')
+    }
   }
 }

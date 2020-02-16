@@ -1,20 +1,6 @@
 <faf-game-filters [filters]="getFilters()" (filters)="updateFilters($event)"></faf-game-filters>
 <div *ngFor="let game of games$ | async" class="faf-panel game-card">
-  <div>
-    <img class="map-thumbnail"
-         [src]="((getMapVersion$(game.relationships?.mapVersion?.data?.id) | async)?.attributes?.thumbnailUrlSmall)
-                || 'assets/images/uef_small.png'"> <!-- TODO: better placeholder -->
-  </div>
-  <div class="game-info">
-    <a class="game-title" [href]="game.attributes?.replayUrl">{{ game.attributes?.name }}</a>
-    <ul>
-      <li *ngFor="let stats of game.relationships.playerStats.data">
-        <img [src]="(getFactionLogoPath(stats.id) | async)
-                     || 'assets/images/uef_small.png'"> <!-- TODO: better placeholder -->
-        {{ (getPlayer$(stats.id) | async).attributes.login }} ({{ getRatingChange$(stats.id) | async }})
-      </li>
-    </ul>
-  </div>
+  <faf-game-card [game]="game"></faf-game-card>
 </div>
 
 <p>Some queries are bugged and return less results than they should. This in turn messes up pagination. It's recommended to increase page size instead of loading the next page to prevent this. <a href="https://github.com/FAForever/faf-java-api/issues/338">Link to issue</a></p>

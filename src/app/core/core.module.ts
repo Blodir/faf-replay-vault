@@ -4,10 +4,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ApiService } from './services/api.service';
 import { GameService } from './services/game.service';
 
-
-
 @NgModule({
-  declarations: [],
   imports: [
     CommonModule,
     HttpClientModule

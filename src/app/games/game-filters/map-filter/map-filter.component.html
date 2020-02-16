@@ -1,0 +1,14 @@
+<div>
+  <label for="mapAutocomplete">Map name</label>
+  <input  id="mapAutocomplete"
+          type="text"
+          placeholder="Name"
+          [formControl]="mapAutoControl"
+          [matAutocomplete]="auto">
+  <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+    <mat-option *ngFor="let option of mapAutoOptions$ | async" [value]="option">
+      {{ option && option.attributes ? option.attributes.displayName : option }}
+    </mat-option>
+  </mat-autocomplete>
+  <button (click)="emit()">clear</button>
+</div>

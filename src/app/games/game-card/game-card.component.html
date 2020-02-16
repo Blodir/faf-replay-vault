@@ -1,0 +1,17 @@
+<div>
+  <img class="map-thumbnail"
+        [src]="((getMapVersion$(game.relationships?.mapVersion?.data?.id) | async)?.attributes?.thumbnailUrlSmall)
+              || 'assets/images/uef_small.png'"> <!-- TODO: better placeholder -->
+</div>
+<div class="game-info">
+  <a class="game-title" [href]="game.attributes?.replayUrl">{{ game.attributes?.name }}</a>
+  <div>{{ game.attributes.endTime | time }}</div>
+  <div>{{ getGameDuration() }} minutes</div>
+  <ul>
+    <li *ngFor="let stats of game.relationships.playerStats.data">
+      <img [src]="(getFactionLogoPath(stats.id) | async)
+                    || 'assets/images/uef_small.png'"> <!-- TODO: better placeholder -->
+      {{ (getPlayer$(stats.id) | async).attributes.login }} ({{ getRatingChange$(stats.id) | async }})
+    </li>
+  </ul>
+</div>

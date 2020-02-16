@@ -38,7 +38,11 @@ export class GameFiltersComponent implements OnInit {
   updateFilter(filter: string, type: string) {
     const filterIndex = this.filters.findIndex((filter: string) => filter.includes(type))
     if (filterIndex >= 0) {
-      this.filters[filterIndex] = filter
+      if (filter) {
+        this.filters[filterIndex] = filter
+      } else {
+        this.filters.splice(filterIndex, 1)
+      }
     } else {
       this.filters.push(filter)
     }

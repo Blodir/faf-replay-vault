@@ -56,7 +56,7 @@ export class GamesFacade {
     'playerStats.player.ladder1v1Rating.rating=gt=2000'
   ]
 
-  private pageSize = 5
+  private pageSize = 10
 
   constructor (private gameService: GameService, private playerService: PlayerService) {}
 

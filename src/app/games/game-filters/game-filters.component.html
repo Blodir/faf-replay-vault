@@ -15,5 +15,6 @@
 
 <div class="faf-panel">
   <faf-players-filter [filteredPlayerIds]="getFilteredPlayerIds()" (filter)="updateFilter($event, 'playerStats.player.id')"></faf-players-filter>
+  <faf-map-filter (filter)="updateFilter($event, 'mapVersion.map.id')"></faf-map-filter>
 </div>
 

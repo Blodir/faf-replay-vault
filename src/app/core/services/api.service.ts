@@ -6,15 +6,14 @@ const token = '';
 
 export enum Endpoint {
   'game' = 'data/game',
-  'player' = 'data/player'
+  'player' = 'data/player',
+  'map' = 'data/map'
 }
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService {
-
-
   constructor(private http: HttpClient) { }
 
   get(endpoint: Endpoint, path = '', params?) {

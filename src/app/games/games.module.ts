@@ -6,21 +6,23 @@ import { GameFiltersComponent } from './game-filters/game-filters.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule, MatButtonModule, MatListModule, MatAutocompleteModule, MatCardModule } from '@angular/material';
 import { PlayersFilterComponent } from './game-filters/players-filter/players-filter.component'
+import { SharedModule } from '../shared/shared.module';
+import { GameCardComponent } from './game-card/game-card.component';
+import { MapFilterComponent } from './game-filters/map-filter/map-filter.component';
 
 @NgModule({
   declarations: [
     GamesComponent,
     GameFiltersComponent,
-    PlayersFilterComponent
+    PlayersFilterComponent,
+    GameCardComponent,
+    MapFilterComponent
   ],
   imports: [
     BrowserModule,
+    SharedModule,
     ReactiveFormsModule,
-    MatInputModule,
-    MatButtonModule,
-    MatListModule,
     MatAutocompleteModule,
-    MatCardModule
   ],
   exports: [
     GamesComponent
