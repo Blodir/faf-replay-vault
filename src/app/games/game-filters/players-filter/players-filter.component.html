@@ -2,7 +2,7 @@
   <label for="playerAutocomplete">Player name</label>
   <input  id="playerAutocomplete"
           type="text"
-          placeholder="Name"
+          [placeholder]="playerId"
           [formControl]="playerAutoControl"
           [matAutocomplete]="auto">
   <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">

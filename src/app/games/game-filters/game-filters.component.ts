@@ -1,8 +1,17 @@
 import { Component, OnInit, Input, Output } from '@angular/core';
 import { FormBuilder, FormControl } from '@angular/forms'
-import { Subject } from 'rxjs';
+import { Subject, Observable } from 'rxjs';
 import { debounceTime, switchMap, startWith, map, tap, filter } from 'rxjs/operators';
 import { PlayerService } from 'src/app/core/services/player.service';
+
+export interface GameFilter {
+  featuredMod?: string
+  ladder1v1Rating?: string
+  mapVersionId?: string
+  playerId?: string
+}
+
+export type GameFilterKey = keyof GameFilter
 
 @Component({
   selector: 'faf-game-filters',
@@ -10,55 +19,28 @@ import { PlayerService } from 'src/app/core/services/player.service';
   styleUrls: ['./game-filters.component.scss']
 })
 export class GameFiltersComponent implements OnInit {
-  private subject = new Subject<string[]>()
-  @Input('filters') filters = []
-  @Output('filters') filtersOut = this.subject.asObservable()
+  private subject = new Subject<GameFilter>()
+  @Input('filters') filters: GameFilter = {}
+  @Output('filters') filtersOut: Observable<GameFilter> = this.subject.asObservable()
 
   filterForm
 
-  constructor(private formBuilder: FormBuilder) {
-    this.filterForm = this.formBuilder.group({
-      'filter-string': ''
-    })
-  }
+  constructor() {}
 
   ngOnInit() {
   }
 
-  onFormAddFilter(form) {
-    this.filters.push(form['filter-string'])
+  onRemoveFilter(key) {
+    delete this.filters[key]
     this.subject.next(this.filters)
   }
 
-  onRemoveFilter(idx) {
-    this.filters.splice(idx, 1)
-    this.subject.next(this.filters)
-  }
-
-  updateFilter(filter: string, type: string) {
-    const filterIndex = this.filters.findIndex((filter: string) => filter.includes(type))
-    if (filterIndex >= 0) {
-      if (filter) {
-        this.filters[filterIndex] = filter
-      } else {
-        this.filters.splice(filterIndex, 1)
-      }
+  updateFilter(key: GameFilterKey, value: string) {
+    if (this.filters[key] && value.length === 0) {
+      delete this.filters[key]
     } else {
-      this.filters.push(filter)
+      this.filters[key] = value
     }
     this.subject.next(this.filters)
-  }
-
-  getFilteredPlayerIds() {
-    const filter: string = this.filters.find((filter: string) => filter.includes('playerStats.player.id'))
-    if (filter) {
-      const regex = /playerStats.player.id==(\d*)/g
-      let matches, output = [];
-      while (matches = regex.exec(filter)) {
-          output.push(matches[1]);
-      }
-      return output
-    }
-    return []
   }
 }

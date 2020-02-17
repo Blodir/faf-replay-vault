@@ -9,6 +9,8 @@ import { PlayersFilterComponent } from './game-filters/players-filter/players-fi
 import { SharedModule } from '../shared/shared.module';
 import { GameCardComponent } from './game-card/game-card.component';
 import { MapFilterComponent } from './game-filters/map-filter/map-filter.component';
+import { RatingFilterComponent } from './game-filters/rating-filter/rating-filter.component';
+import { ModeFilterComponent } from './game-filters/mode-filter/mode-filter.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +18,9 @@ import { MapFilterComponent } from './game-filters/map-filter/map-filter.compone
     GameFiltersComponent,
     PlayersFilterComponent,
     GameCardComponent,
-    MapFilterComponent
+    MapFilterComponent,
+    RatingFilterComponent,
+    ModeFilterComponent
   ],
   imports: [
     BrowserModule,

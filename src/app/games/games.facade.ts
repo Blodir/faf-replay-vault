@@ -51,10 +51,7 @@ export class GamesFacade {
     distinctUntilChanged()
   )
 
-  filters = [
-    'featuredMod.id==6',
-    'playerStats.player.ladder1v1Rating.rating=gt=2000'
-  ]
+  filters = []
 
   private pageSize = 10
 

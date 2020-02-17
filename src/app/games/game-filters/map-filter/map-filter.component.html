@@ -2,7 +2,7 @@
   <label for="mapAutocomplete">Map name</label>
   <input  id="mapAutocomplete"
           type="text"
-          placeholder="Name"
+          [placeholder]="mapId"
           [formControl]="mapAutoControl"
           [matAutocomplete]="auto">
   <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">

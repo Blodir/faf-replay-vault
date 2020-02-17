@@ -11,8 +11,8 @@ import { Subject, Observable } from 'rxjs';
 })
 export class PlayersFilterComponent implements OnInit {
   private subject = new Subject<string>()
-  @Input() filteredPlayerIds = []
-  @Output('filter') filterOut = this.subject.asObservable()
+  @Input() playerId = ''
+  @Output('playerId') playerIdOut = this.subject.asObservable()
 
   playerAutoControl = new FormControl()
   playerAutoOptions$
@@ -40,7 +40,7 @@ export class PlayersFilterComponent implements OnInit {
   }
 
   private addFilter(playerId: string) {
-    this.filteredPlayerIds.push(playerId)
+    this.playerId = playerId
     this.emit(playerId)
   }
 
@@ -49,11 +49,6 @@ export class PlayersFilterComponent implements OnInit {
       this.subject.next()
       return
     }
-    const singleSelection = true
-    if (singleSelection) {
-      this.subject.next('playerStats.player.id==' + playerId)
-    } else {
-      this.subject.next('(' + this.filteredPlayerIds.map((id) => 'playerStats.player.id==' + id).join(',') + ')')
-    }
+    this.subject.next('playerStats.player.id==' + playerId)
   }
 }

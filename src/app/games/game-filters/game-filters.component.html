@@ -1,20 +1,17 @@
 <div class="faf-panel">
   Filters
   <ul>
-    <li *ngFor="let filter of filters; let idx = index">
-      {{ filter }}
-      <button (click)="onRemoveFilter(idx)">remove</button>
+    <li *ngFor="let filter of filters | keyvalue">
+      {{ filter.key }} : {{ filter.value }}
+      <button (click)="onRemoveFilter(filter.key)">remove</button>
     </li>
   </ul>
-  <form [formGroup]="filterForm" (ngSubmit)="onFormAddFilter(filterForm.value)">
-    <label>Add a raw filter</label>
-    <input type="text" formControlName="filter-string">
-    <button type="submit">Add</button>
-  </form>
 </div>
 
 <div class="faf-panel">
-  <faf-players-filter [filteredPlayerIds]="getFilteredPlayerIds()" (filter)="updateFilter($event, 'playerStats.player.id')"></faf-players-filter>
-  <faf-map-filter (filter)="updateFilter($event, 'mapVersion.map.id')"></faf-map-filter>
+  <faf-players-filter [playerId]="filters.playerId || ''" (playerId)="updateFilter('playerId', $event)"></faf-players-filter>
+  <faf-map-filter [mapId]="filters.mapVersionId || ''" (filter)="updateFilter('mapVersionId', $event)"></faf-map-filter>
+  <faf-rating-filter (filter)="updateFilter('ladder1v1Rating', $event)"></faf-rating-filter>
+  <faf-mode-filter [featuredMod]="filters.featuredMod" (filter)="updateFilter('featuredMod', $event)"></faf-mode-filter>
 </div>
 
