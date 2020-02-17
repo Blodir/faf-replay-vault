@@ -1,14 +1,15 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { TimePipe } from './pipes/time.pipe';
+import { TimeFromNowPipe } from './pipes/time-from-now.pipe';
+import { TimeDurationPipe } from './pipes/time-duration.pipe';
 
 
 
 @NgModule({
-  declarations: [TimePipe],
+  declarations: [TimeFromNowPipe, TimeDurationPipe],
   imports: [
     CommonModule
   ],
-  exports: [TimePipe]
+  exports: [TimeFromNowPipe, TimeDurationPipe]
 })
 export class SharedModule { }

@@ -31,8 +31,7 @@ export class MapFilterComponent implements OnInit {
       }),
       debounceTime(500),
       switchMap((val) => this.mapService.getMapAutocomplete(val && val.attributes ? val.attributes.displayName : val)),
-      map((res: any) => res.data),
-      tap(console.log)
+      map((res: any) => res.data)
     )
   }
 
@@ -44,7 +43,7 @@ export class MapFilterComponent implements OnInit {
     if (mapId) {
       this.subject.next('mapVersion.map.id==' + mapId)
     } else {
-      this.subject.next()
+      this.subject.next('')
     }
   }
 }

@@ -90,7 +90,7 @@ export class GamesFacade {
       this.resetState()
     }
     const query = this.getQuery({'page[offset]': page * this.pageSize})
-    this.gameService.getGames(query).pipe(tap(console.log)).subscribe(this.resolver.bind(this))
+    this.gameService.getGames(query).subscribe(this.resolver.bind(this))
   }
 
   changePageSize(pageSize) {

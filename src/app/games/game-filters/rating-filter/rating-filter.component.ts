@@ -1,4 +1,4 @@
-import { Component, OnInit, Output } from '@angular/core';
+import { Component, OnInit, Output, Input } from '@angular/core';
 import { Subject } from 'rxjs';
 import { FormControl } from '@angular/forms';
 import { map, filter, debounceTime } from 'rxjs/operators';
@@ -10,6 +10,13 @@ import { map, filter, debounceTime } from 'rxjs/operators';
 })
 export class RatingFilterComponent implements OnInit {
   ratingControl = new FormControl()
+
+  @Input() set rating(r: string) {
+    if (r) {
+      const split = r.split('=')
+      this.ratingControl.setValue(split[split.length - 1], {emitEvent: false})
+    }
+  }
 
   @Output() filter = this.ratingControl.valueChanges.pipe(
     debounceTime(500),

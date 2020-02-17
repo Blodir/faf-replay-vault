@@ -11,7 +11,7 @@
 <div class="faf-panel">
   <faf-players-filter [playerId]="filters.playerId || ''" (playerId)="updateFilter('playerId', $event)"></faf-players-filter>
   <faf-map-filter [mapId]="filters.mapVersionId || ''" (filter)="updateFilter('mapVersionId', $event)"></faf-map-filter>
-  <faf-rating-filter (filter)="updateFilter('ladder1v1Rating', $event)"></faf-rating-filter>
+  <faf-rating-filter [rating]="filters.ladder1v1Rating" (filter)="updateFilter('ladder1v1Rating', $event)"></faf-rating-filter>
   <faf-mode-filter [featuredMod]="filters.featuredMod" (filter)="updateFilter('featuredMod', $event)"></faf-mode-filter>
 </div>
 

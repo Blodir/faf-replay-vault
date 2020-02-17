@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, Input } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'faf-mode-filter',
@@ -19,7 +19,7 @@ export class ModeFilterComponent implements OnInit {
   }
 
   @Output() filter = this.modeControl.valueChanges.pipe(
-    map((val) => val ? 'featuredMod.id==6' : '')
+    map((val) => val ? 'featuredMod.id==6' : ''),
   )
 
   constructor() { }

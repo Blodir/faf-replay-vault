@@ -14,15 +14,23 @@ export class GamesComponent implements OnInit {
   unsubscribe$ = new Subject<void>()
   games$: Observable<any[]>
 
+  loading = false
+
   private currentPage = 0
 
   constructor(private facade: GamesFacade, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.games$ = this.facade.games$
+    this.games$.pipe(takeUntil(this.unsubscribe$)).subscribe(() => this.loading = false)
     this.route.queryParams.pipe(skip(1), takeUntil(this.unsubscribe$)).subscribe((params) => {
       this.currentPage = 0
-      if (params.filter) this.facade.filters = params.filter.split(';')
+      if (params.filter) {
+        this.facade.filters = params.filter.split(';')
+      } else {
+        this.facade.filters = []
+      }
+      this.loading = true
       this.facade.loadAll()
     })
     if (!this.route.snapshot.queryParams['filter']) {
@@ -61,6 +69,7 @@ export class GamesComponent implements OnInit {
 
   loadMore() {
     this.currentPage++
+    this.loading = true
     this.facade.loadAll(this.currentPage)
   }
 

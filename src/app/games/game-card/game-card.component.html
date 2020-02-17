@@ -5,8 +5,8 @@
 </div>
 <div class="game-info">
   <a class="game-title" [href]="game.attributes?.replayUrl">{{ game.attributes?.name }}</a>
-  <div>{{ game.attributes.endTime | time }}</div>
-  <div>{{ getGameDuration() }} minutes</div>
+  <div>Ended {{ game.attributes.endTime | timeFromNow }}</div>
+  <div>Lasted {{ game.attributes.startTime | timeDuration:game.attributes.endTime }}</div>
   <ul>
     <li *ngFor="let stats of game.relationships.playerStats.data">
       <img [src]="(getFactionLogoPath(stats.id) | async)

@@ -45,10 +45,10 @@ export class PlayersFilterComponent implements OnInit {
   }
 
   private emit(playerId) {
-    if (!playerId) {
-      this.subject.next()
-      return
+    if (playerId) {
+      this.subject.next('playerStats.player.id==' + playerId)
+    } else {
+      this.subject.next('')
     }
-    this.subject.next('playerStats.player.id==' + playerId)
   }
 }
