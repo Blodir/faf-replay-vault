@@ -6,7 +6,7 @@
 <div class="game-info">
   <a class="game-title" [href]="game.attributes?.replayUrl">{{ game.attributes?.name }}</a>
   <a [href]="'http://faf.geosearchef.de/replay-parser/#' + game.id" target="_blank">Replay parser</a>
-  <div>Ended {{ game.attributes.endTime | timeFromNow }}</div>
+  <div fafTooltip [textContent]="getFullEndTime()">Ended {{ game.attributes.endTime | timeFromNow }}</div>
   <div>Lasted {{ game.attributes.startTime | timeDuration:game.attributes.endTime }}</div>
   <ul>
     <li *ngFor="let stats of game.relationships.playerStats.data">

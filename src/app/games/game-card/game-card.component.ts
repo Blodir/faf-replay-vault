@@ -3,6 +3,7 @@ import { GamesFacade } from '../games.facade';
 import { Observable, of } from 'rxjs';
 import { map, switchMap, catchError } from 'rxjs/operators';
 import { LocalSettingsService } from 'src/app/core/services/local-settings.service';
+import * as moment from 'moment';
 
 export interface RatingChange {
   before
@@ -89,5 +90,9 @@ export class GameCardComponent implements OnInit {
     // @ts-ignore
     const diff = end - start
     return Math.round(diff / 1000 / 60)
+  }
+
+  getFullEndTime() {
+    return moment(this.game.attributes.endTime).toLocaleString();
   }
 }
