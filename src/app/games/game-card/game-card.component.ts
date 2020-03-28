@@ -4,6 +4,12 @@ import { Observable, of } from 'rxjs';
 import { map, switchMap, catchError } from 'rxjs/operators';
 import { LocalSettingsService } from 'src/app/core/services/local-settings.service';
 
+export interface RatingChange {
+  before
+  after
+  change
+}
+
 @Component({
   selector: 'faf-game-card',
   templateUrl: './game-card.component.html',
@@ -31,7 +37,7 @@ export class GameCardComponent implements OnInit {
     )
   }
 
-  getRatingChange$(playerStatsId): Observable<string> {
+  getRatingChange$(playerStatsId): Observable<RatingChange> {
     return this.facade.gamePlayerStats$.pipe(
       map(stats => stats[playerStatsId]),
       map(stats => {
@@ -41,9 +47,13 @@ export class GameCardComponent implements OnInit {
         const change = Math.round(after - before)
         let str = ''
         change > 0 ? str = ' +' : str = ' '
-        return Math.round(before) + str + change
+        return {
+          before: Math.round(before),
+          after: Math.round(after),
+          change: str + change
+        }
       }),
-      catchError((err) => of('N/A'))
+      catchError((err) => of({before: 0, after: 0, change: 'N/A'}))
     )
   }
 

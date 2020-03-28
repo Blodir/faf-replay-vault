@@ -12,6 +12,7 @@ import { MapFilterComponent } from './game-filters/map-filter/map-filter.compone
 import { RatingFilterComponent } from './game-filters/rating-filter/rating-filter.component';
 import { ModeFilterComponent } from './game-filters/mode-filter/mode-filter.component';
 import { GameLocalSettingsComponent } from './game-local-settings/game-local-settings.component';
+import { RenderRatingChangePipe } from './game-card/render-rating-change.pipe';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { GameLocalSettingsComponent } from './game-local-settings/game-local-set
     MapFilterComponent,
     RatingFilterComponent,
     ModeFilterComponent,
-    GameLocalSettingsComponent
+    GameLocalSettingsComponent,
+    RenderRatingChangePipe
   ],
   imports: [
     BrowserModule,

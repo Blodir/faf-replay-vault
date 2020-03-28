@@ -12,7 +12,7 @@
     <li *ngFor="let stats of game.relationships.playerStats.data">
       <img [src]="(getFactionLogoPath(stats.id) | async)
                     || 'assets/images/uef_small.png'"> <!-- TODO: better placeholder -->
-      {{ (getPlayer$(stats.id) | async).attributes.login }}<ng-container *ngIf="doShowResults()"> ({{ getRatingChange$(stats.id) | async }})</ng-container>
+      {{ (getPlayer$(stats.id) | async).attributes.login }} ({{ getRatingChange$(stats.id) | async | renderRatingChange:doShowResults() }})
     </li>
   </ul>
 </div>
