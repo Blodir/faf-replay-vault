@@ -5,13 +5,14 @@
 </div>
 <div class="game-info">
   <a class="game-title" [href]="game.attributes?.replayUrl">{{ game.attributes?.name }}</a>
+  <a [href]="'http://faf.geosearchef.de/replay-parser/#' + game.id" target="_blank">Replay parser</a>
   <div>Ended {{ game.attributes.endTime | timeFromNow }}</div>
   <div>Lasted {{ game.attributes.startTime | timeDuration:game.attributes.endTime }}</div>
   <ul>
     <li *ngFor="let stats of game.relationships.playerStats.data">
       <img [src]="(getFactionLogoPath(stats.id) | async)
                     || 'assets/images/uef_small.png'"> <!-- TODO: better placeholder -->
-      {{ (getPlayer$(stats.id) | async).attributes.login }} ({{ getRatingChange$(stats.id) | async }})
+      {{ (getPlayer$(stats.id) | async).attributes.login }}<ng-container *ngIf="doShowResults()"> ({{ getRatingChange$(stats.id) | async }})</ng-container>
     </li>
   </ul>
 </div>

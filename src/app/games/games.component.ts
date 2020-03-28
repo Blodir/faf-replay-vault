@@ -77,6 +77,11 @@ export class GamesComponent implements OnInit {
     this.facade.changePageSize(pageSize)
   }
 
+  reload() {
+    this.loading = true;
+    this.facade.loadAll(0);
+  }
+
   ngOnDestroy() {
     this.unsubscribe$.next()
     this.unsubscribe$.complete()

@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { GamesFacade } from '../games.facade';
 import { Observable, of } from 'rxjs';
 import { map, switchMap, catchError } from 'rxjs/operators';
+import { LocalSettingsService } from 'src/app/core/services/local-settings.service';
 
 @Component({
   selector: 'faf-game-card',
@@ -11,9 +12,13 @@ import { map, switchMap, catchError } from 'rxjs/operators';
 export class GameCardComponent implements OnInit {
   @Input() game
 
-  constructor(private facade: GamesFacade) { }
+  constructor(private facade: GamesFacade, private localSettingsService: LocalSettingsService) { }
 
   ngOnInit() {
+  }
+
+  doShowResults(): boolean {
+    return this.localSettingsService.get("showResult");
   }
 
   getPlayer$(playerStatsId): Observable<any> {

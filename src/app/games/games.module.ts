@@ -11,6 +11,7 @@ import { GameCardComponent } from './game-card/game-card.component';
 import { MapFilterComponent } from './game-filters/map-filter/map-filter.component';
 import { RatingFilterComponent } from './game-filters/rating-filter/rating-filter.component';
 import { ModeFilterComponent } from './game-filters/mode-filter/mode-filter.component';
+import { GameLocalSettingsComponent } from './game-local-settings/game-local-settings.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { ModeFilterComponent } from './game-filters/mode-filter/mode-filter.comp
     GameCardComponent,
     MapFilterComponent,
     RatingFilterComponent,
-    ModeFilterComponent
+    ModeFilterComponent,
+    GameLocalSettingsComponent
   ],
   imports: [
     BrowserModule,

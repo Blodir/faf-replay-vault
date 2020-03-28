@@ -1,0 +1,12 @@
+@import 'vars';
+
+.info-bar {
+  background-color: $neutral-2;
+  padding: 10px;
+  box-shadow: 0 1px 4px 0 rgba(0,0,0,.1);
+  font-size: $fs-1;
+}
+
+.info-bar > div {
+  width: 800px;
+}

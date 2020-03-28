@@ -1,4 +1,4 @@
-<div class="faf-panel">
+<!-- <div class="faf-panel">
   Filters
   <ul>
     <li *ngFor="let filter of filters | keyvalue">
@@ -6,12 +6,14 @@
       <button (click)="onRemoveFilter(filter.key)">remove</button>
     </li>
   </ul>
-</div>
+</div> -->
 
-<div class="faf-panel">
-  <faf-players-filter [playerId]="filters.playerId || ''" (playerId)="updateFilter('playerId', $event)"></faf-players-filter>
-  <faf-map-filter [mapId]="filters.mapVersionId || ''" (filter)="updateFilter('mapVersionId', $event)"></faf-map-filter>
-  <faf-rating-filter [rating]="filters.ladder1v1Rating" (filter)="updateFilter('ladder1v1Rating', $event)"></faf-rating-filter>
-  <faf-mode-filter [featuredMod]="filters.featuredMod" (filter)="updateFilter('featuredMod', $event)"></faf-mode-filter>
+<div class="d-flex flex-row flex-wrap mb-2 items-end">
+  <faf-players-filter class="d-block mb-2 mr-3" [playerId]="filters.playerId || ''" (playerId)="updateFilter('playerId', $event)"></faf-players-filter>
+  <faf-map-filter class="d-block mb-2 mr-3" [mapId]="filters.mapVersionId || ''" (filter)="updateFilter('mapVersionId', $event)"></faf-map-filter>
+</div>
+<div class="d-flex flex-row flex-wrap mb-2 items-end">
+  <faf-rating-filter class="d-block mb-2 mr-3" [rating]="filters.ladder1v1Rating" (filter)="updateFilter('ladder1v1Rating', $event)"></faf-rating-filter>
+  <faf-mode-filter class="d-block mb-2" [featuredMod]="filters.featuredMod" (filter)="updateFilter('featuredMod', $event)"></faf-mode-filter>
 </div>
 

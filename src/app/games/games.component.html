@@ -1,16 +1,33 @@
-<faf-game-filters [filters]="getFilters()" (filters)="updateFilters($event)"></faf-game-filters>
+<div class="d-flex justify-center m-5">
+  <div class="main-container">
+    <div>
+      <h3>Local settings</h3>
+      <faf-game-local-settings></faf-game-local-settings>
+    </div>
+    <hr>
+    <div>
+      <h3>Query params</h3>
+      <faf-game-filters [filters]="getFilters()" (filters)="updateFilters($event)"></faf-game-filters>
+    </div>
+    <hr>
 
-<ng-container *ngIf="!loading; else ghost">
-  <div *ngFor="let game of games$ | async" class="faf-panel game-card">
-    <faf-game-card [game]="game"></faf-game-card>
+    <ng-container *ngIf="!loading; else ghost">
+      <div class="d-flex flex-row justify-between">
+        <h3 class="mr-3">Results</h3>
+        <button (click)="reload()">Refresh</button>
+      </div>
+      <div *ngFor="let game of games$ | async" class="faf-panel game-card">
+        <faf-game-card [game]="game"></faf-game-card>
+      </div>
+    </ng-container>
+    <ng-template #ghost>loading...</ng-template>
+
+    <p>Some queries are bugged and return less results than they should. This in turn messes up pagination (that's why infinite scroll doesn't exist yet...). It's recommended to increase page size instead of loading the next page to prevent this. <a href="https://github.com/FAForever/faf-java-api/issues/338" target="_blank">Link to issue</a></p>
+    <div>Results: {{ (games$ | async).length }}</div>
+    <button (click)="loadMore()">Load more!</button>
+    <button (click)="changePageSize(5)">Page size: 5</button>
+    <button (click)="changePageSize(20)">Page size: 20</button>
+    <button (click)="changePageSize(50)">Page size: 50</button>
+    <button (click)="changePageSize(100)">Page size: 100</button>
   </div>
-</ng-container>
-<ng-template #ghost>loading...</ng-template>
-
-<p>Some queries are bugged and return less results than they should. This in turn messes up pagination. It's recommended to increase page size instead of loading the next page to prevent this. <a href="https://github.com/FAForever/faf-java-api/issues/338">Link to issue</a></p>
-<div>Results: {{ (games$ | async).length }}</div>
-<button (click)="loadMore()">Load more!</button>
-<button (click)="changePageSize(5)">Page size: 5</button>
-<button (click)="changePageSize(10)">Page size: 10</button>
-<button (click)="changePageSize(50)">Page size: 50</button>
-<button (click)="changePageSize(100)">Page size: 100</button>
+</div>

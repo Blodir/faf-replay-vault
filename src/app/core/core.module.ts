@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { ApiService } from './services/api.service';
 import { GameService } from './services/game.service';
+import { LocalSettingsService } from './services/local-settings.service';
 
 @NgModule({
   imports: [
@@ -11,7 +12,8 @@ import { GameService } from './services/game.service';
   ],
   providers: [
     ApiService,
-    GameService
+    GameService,
+    LocalSettingsService
   ]
 })
 export class CoreModule { }

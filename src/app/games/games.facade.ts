@@ -53,7 +53,7 @@ export class GamesFacade {
 
   filters = []
 
-  private pageSize = 10
+  private pageSize = 20
 
   constructor (private gameService: GameService, private playerService: PlayerService) {}
 
