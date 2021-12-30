@@ -22,7 +22,6 @@
     </ng-container>
     <ng-template #ghost>loading...</ng-template>
 
-    <p>Some queries are bugged and return less results than they should. This in turn messes up pagination (that's why infinite scroll doesn't exist yet...). It's recommended to increase page size instead of loading the next page to prevent this. <a href="https://github.com/FAForever/faf-java-api/issues/338" target="_blank">Link to issue</a></p>
     <div>Results: {{ (games$ | async).length }}</div>
     <button (click)="loadMore()">Load more!</button>
     <button (click)="changePageSize(5)">Page size: 5</button>

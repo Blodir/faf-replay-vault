@@ -5,7 +5,7 @@ import { debounceTime, switchMap, startWith, map, tap, filter } from 'rxjs/opera
 import { PlayerService } from 'src/app/core/services/player.service';
 
 export interface GameFilter {
-  featuredMod?: string
+  ladderOnly?: string
   ladder1v1Rating?: string
   mapVersionId?: string
   playerId?: string
@@ -42,5 +42,13 @@ export class GameFiltersComponent implements OnInit {
       this.filters[key] = value
     }
     this.subject.next(this.filters)
+  }
+
+  getLadderOnlyFilter() {
+    return this.filters['ladderOnly'] && this.filters['ladderOnly'].includes('playerStats.ratingChanges.leaderboard.id=in=("2")');
+  }
+
+  setLadderOnlyFilter(val: boolean) {
+    this.updateFilter('ladderOnly', val ? 'playerStats.ratingChanges.leaderboard.id=in=("2")' : '');
   }
 }

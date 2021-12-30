@@ -36,7 +36,7 @@ export class GamesComponent implements OnInit {
     if (!this.route.snapshot.queryParams['filter']) {
       this.router.navigate([], {
         queryParams: {
-          filter: 'featuredMod.id==6;playerStats.player.ladder1v1Rating.rating=gt=2000'
+          filter: 'playerStats.ratingChanges.leaderboard.id=in=("2");playerStats.player.ladder1v1Rating.rating=gt=2000'
         }
       })
     }
@@ -47,8 +47,8 @@ export class GamesComponent implements OnInit {
     this.facade.filters.forEach((filter: string) => {
       if (filter.includes('playerStats.player.id')) {
         out.playerId = filter
-      } else if (filter.includes('featuredMod')) {
-        out.featuredMod = filter
+      } else if (filter.includes('playerStats.ratingChanges.leaderboard.id=in=("2")')) {
+        out.ladderOnly = filter
       } else if (filter.includes('playerStats.player.ladder1v1Rating')) {
         out.ladder1v1Rating = filter
       } else if (filter.includes('mapVersion.map.id')) {
@@ -69,7 +69,6 @@ export class GamesComponent implements OnInit {
 
   loadMore() {
     this.currentPage++
-    this.loading = true
     this.facade.loadAll(this.currentPage)
   }
 

@@ -10,17 +10,11 @@ import { map, tap } from 'rxjs/operators';
 export class ModeFilterComponent implements OnInit {
   modeControl = new FormControl()
 
-  @Input() set featuredMod(val: string) {
-    if (val && val.includes('6')) {
-      this.modeControl.setValue(true, {emitEvent: false})
-    } else {
-      this.modeControl.setValue(false, {emitEvent: false})
-    }
+  @Input() set ladderOnly(val: boolean) {
+    this.modeControl.setValue(val, {emitEvent: false});
   }
 
-  @Output() filter = this.modeControl.valueChanges.pipe(
-    map((val) => val ? 'featuredMod.id==6' : ''),
-  )
+  @Output() filter = this.modeControl.valueChanges;
 
   constructor() { }
 

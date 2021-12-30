@@ -14,6 +14,6 @@
 </div>
 <div class="d-flex flex-row flex-wrap mb-2 items-end">
   <faf-rating-filter class="d-block mb-2 mr-3" [rating]="filters.ladder1v1Rating" (filter)="updateFilter('ladder1v1Rating', $event)"></faf-rating-filter>
-  <faf-mode-filter class="d-block mb-2" [featuredMod]="filters.featuredMod" (filter)="updateFilter('featuredMod', $event)"></faf-mode-filter>
+  <faf-mode-filter class="d-block mb-2" [ladderOnly]="getLadderOnlyFilter()" (filter)="setLadderOnlyFilter($event)"></faf-mode-filter>
 </div>
 
